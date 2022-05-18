@@ -5,29 +5,28 @@
           <div class="avatar_box">
             <img src="../assets/logo.svg" alt="">
           </div>
-          <!-- login form area -->
-          <!-- login account -->
+          <!-- signup form area -->
+          <!-- account -->
           <el-form class="login_form">            
           <p>
             <el-input placeholder="please input user account" v-model="userNo">
-                <template slot="prepend">Account&nbsp;&nbsp;</template>
+                <template slot="prepend">Account&nbsp;&nbsp;&nbsp;</template>
+            </el-input>
+          </p>                   
+          <p>
+            <el-input placeholder="please input user nickname" v-model="userName">
+                <template slot="prepend">Username</template>
             </el-input>
           </p>
-          <!-- login password -->
+          <!-- password -->
           <p>
             <el-input placeholder="please input user password" v-model="password" show-password>
-                <template slot="prepend">Password</template>
+                <template slot="prepend">Password&nbsp;</template>
             </el-input>
-          </p>
-          <p>
-            <el-checkbox v-model="remMe">Remember Me</el-checkbox>
-          </p>
-          <!-- login button -->
-          <p class="btns">
-            <el-button type="primary">Log In</el-button>        
-            <router-link to='/signup'>
-              <el-button type="info">Sign Up</el-button>
-            </router-link>            
+          </p>          
+          <!-- signup button -->
+          <p class="btns">                 
+            <el-button type="primary">Sign Up</el-button>
           </p>
           </el-form>
         </div>        
@@ -39,8 +38,8 @@ export default {
   data() {
     return {
       userNo: "",
+      userName: "",
       password: "",
-      remMe: false,
     }
   }
 }
@@ -92,8 +91,6 @@ export default {
 
   button {
     width: 100px;
-    margin-left: 20px;
-    margin-right: 20px;
   }
 }
 .login_form {  
