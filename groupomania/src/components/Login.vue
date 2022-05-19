@@ -6,29 +6,29 @@
             <img src="../assets/logo.svg" alt="">
           </div>
           <!-- login form area -->
-          <!-- login account -->
-          <el-form class="login_form">            
-          <p>
-            <el-input placeholder="please input user account" v-model="userNo">
+          <el-form :model="loginForm" :rules="loginFormRules" class="login_form">
+          <!-- login account -->            
+          <el-form-item class="login_form_item" prop="userNo">
+            <el-input placeholder="please input user account" v-model="loginForm.userNo">
                 <template slot="prepend">Account&nbsp;&nbsp;</template>
             </el-input>
-          </p>
+          </el-form-item>
           <!-- login password -->
-          <p>
-            <el-input placeholder="please input user password" v-model="password" show-password>
+          <el-form-item class="login_form_item" prop="password">
+            <el-input placeholder="please input user password" v-model="loginForm.password" show-password>
                 <template slot="prepend">Password</template>
             </el-input>
-          </p>
-          <p>
-            <el-checkbox v-model="remMe">Remember Me</el-checkbox>
-          </p>
+          </el-form-item>
+          <el-form-item class="login_form_item">
+            <el-checkbox v-model="loginForm.remMe">Remember Me</el-checkbox>
+          </el-form-item>
           <!-- login button -->
-          <p class="btns">
+          <el-form-item class="login_form_item, btns">
             <el-button type="primary">Log In</el-button>        
             <router-link to='/signup'>
               <el-button type="info">Sign Up</el-button>
             </router-link>            
-          </p>
+          </el-form-item>
           </el-form>
         </div>        
     </div>
@@ -38,9 +38,26 @@
 export default {
   data() {
     return {
-      userNo: "",
-      password: "",
-      remMe: false,
+      // 这是登录表单的数据绑定对象
+      loginForm: {
+        userNo: "",
+        password: "",
+        remMe: false,
+      },
+      // 这是表单的验证规则对象
+      loginFormRules: {
+        // 验证用户名是否合法
+        userNo: [
+          { required: true, message: '请输入登录名称', trigger: 'blur' },
+          { type: 'email', message: " Please input correct email address format", trigger: 'blur'},
+          { min: 3, max: 20, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+        ],
+        // 验证密码是否合法
+        password: [
+          { required: true, message: '请输入登录密码', trigger: 'blur' },
+          { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
+        ]
+      }
     }
   }
 }
@@ -84,7 +101,7 @@ export default {
     }
   }
 
-  p {
+  .login_form_item {
     width: 90%;
     margin: auto;
     margin-bottom: 20px;
