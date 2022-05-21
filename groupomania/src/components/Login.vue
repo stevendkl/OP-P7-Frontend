@@ -46,16 +46,16 @@ export default {
       },
       // 这是表单的验证规则对象
       loginFormRules: {
-        // 验证用户名是否合法
+        // 验证email是否合法
         email: [
-          { required: true, message: '请输入登录名称', trigger: 'blur' },
+          { required: true, message: 'Please input login email', trigger: 'blur' },
           { type: 'email', message: " Please input correct email address format", trigger: 'blur'},
-          { min: 3, max: 20, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+          { min: 3, max: 20, message: '3 to 20 characters long', trigger: 'blur' }
         ],
         // 验证密码是否合法
         password: [
-          { required: true, message: '请输入登录密码', trigger: 'blur' },
-          { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
+          { required: true, message: 'Please input login password', trigger: 'blur' },
+          { min: 6, max: 15, message: '6 to 15 characters long', trigger: 'blur' }
         ]
       }
     }
