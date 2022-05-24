@@ -4,70 +4,80 @@
     <el-header>
       <div>
         <img src="../assets/icon-left-font-monochrome-white.svg" alt="">
-        <span>User: </span>        
+        <span>User: {{userinfo}}</span>        
       </div>
-      <el-button type="info" @click="logout">Logout</el-button>
-    </el-header>
-    <!-- body area -->
-    <el-container>
-      <!-- side area -->
-      <el-aside width="200px">Aside</el-aside>
-      <!-- main area -->
-      <el-container>
-        <el-main>Main</el-main>
-        <!-- footer area -->
-        <el-footer>Footer</el-footer>
-      </el-container>
-    </el-container>
+      <div>
+        <el-button type="primary" @click="postNew">New Post</el-button>
+        <el-button type="primary" @click="profile">Profile</el-button>
+        <el-button type="info" @click="logout">Logout</el-button>
+      </div>
+      
+    </el-header>    
+    <!-- main area -->
+    <el-main>
+      <article v-for="item in menulist" :key="item.id">
+      <h3>{{ item.name }}</h3>
+        <div>
+        <!--    摘要      -->
+        <p v-html="item.description"></p>
+        <ul>
+          <!--    作者        -->
+          <li>
+            <svg-icon icon-class="author"></svg-icon>
+            <span>{{ item.manufacturer }}</span>
+          </li>
+
+          <!--    创建时间        -->
+          <li>
+            <svg-icon icon-class="clock"></svg-icon>
+            <span>{{ item.createdAt}}</span>
+          </li>
+        </ul>
+        </div>
+        </article>
+    </el-main>
+    <!-- footer area -->
+    <el-footer>Footer</el-footer>    
   </el-container>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      userinfo: sessionStorage.username,
+      menulist: [],
+    }
+  },
+
+  created() {
+    this.getMenuList()
+  },
+
   methods: {
     logout() {
       window.sessionStorage.clear()
       this.$router.push('/login')
-    }
-  }
-}
+    },
+    profile() {      
+      this.$router.push('/profile')
+    },
+    postNew() {      
+      this.$router.push('/newpost')
+    },
+    // get all post menu
+    async getMenuList() {
+      const {data: res, status: ress} = await this.$http.get('sauces');
+      if (ress !== 200) return this.$message.error('can not read posts');        
+      this.menulist = res;
+      console.log(res);
+    },
+  },
+};
+
+
 </script>
 
 <style lang="less" scoped>
-
-.home-container {
-  height: 100%;
-}
-
-.el-header {
-  background-color: #373d41;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #fff;
-  font-size: 20px;
-  > div {
-    display: flex;
-    align-items: center;
-    span {
-      margin-left: 15px;
-    }
-    img {
-      height:48px;
-    };
-  };
-}
-
-.el-aside {
-  background-color: #333744;
-}
-
-.el-main {
-  background-color: #eaedf1;
-}
-
-.el-footer {
-  background-color: #373d41;
-}
-
+@import '../assets/css/header.less';
 </style>

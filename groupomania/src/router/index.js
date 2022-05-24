@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
 import SignUp from '../components/SignUp.vue'
 import Home from '../components/Home.vue'
+import Profile from '../components/Profile.vue'
+import Newpost from '../components/Newpost.vue'
 
 Vue.use(VueRouter)
 
@@ -10,7 +12,9 @@ const routes = [
   { path: '/', redirect: '/login' },
   { path: '/login', component: Login },
   { path: '/signup', component: SignUp },
-  { path: '/home', component: Home }
+  { path: '/home', component: Home },
+  { path: '/profile', component: Profile },
+  { path: '/newpost', component: Newpost },
 ]
 
 const router = new VueRouter({

@@ -7,6 +7,11 @@ import axios from 'axios'
 
 // 配置请求的根路径
 axios.defaults.baseURL = 'http://localhost:3000/api/'
+axios.interceptors.request.use(config => {
+  //console.log(config)
+  config.headers.Authorization = window.sessionStorage.getItem('token')
+  return config
+})
 
 Vue.prototype.$http = axios
 
