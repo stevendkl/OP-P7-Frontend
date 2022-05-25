@@ -74,7 +74,10 @@ export default {
         var tokenattach = tokenhead + res.token;
         window.sessionStorage.setItem('token', tokenattach);
         window.sessionStorage.setItem('username', res.username);
-        window.sessionStorage.setItem('userId', res.userId);        
+        window.sessionStorage.setItem('userId', res.userId);
+        window.sessionStorage.setItem('email', res.email);
+        window.sessionStorage.setItem('registerdate', res.registerdate);
+
         // 2. 通过编程式导航跳转到后台主页，路由地址是 /home
         this.$router.push('/home');
       });

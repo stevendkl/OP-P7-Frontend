@@ -22,12 +22,10 @@
         <!--    摘要      -->
         <p v-html="item.description"></p>
         <ul>
-
           <!--    作者        -->
           <li class="author">            
             <span>Author: {{ item.manufacturer }}</span>
           </li>
-
           <!--    创建时间        -->
           <li class="createTime">          
             <span>post at: {{ item.createdAt | dateFormat }}</span>
