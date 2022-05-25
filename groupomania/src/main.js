@@ -13,6 +13,7 @@ axios.interceptors.request.use(config => {
   return config
 })
 
+//命名$http = axios
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
