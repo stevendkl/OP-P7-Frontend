@@ -15,12 +15,14 @@
     </el-header>    
     <!-- main area -->
     <el-main>
+      <el-tabs v-model="activeName">
+      <el-tab-pane label="All posts" name="first">
       <div class="articles">
-      <article v-for="item in menulist" :key="item.id">
-      <h3>{{ item.name }}</h3>
+      <article v-for="item in reversePost" :key="item.id">
+      <h3 @click="articleDetail(item._id)">{{ item.name }}</h3>
         <div class="info-box">
         <!--    摘要      -->
-        <p v-html="item.description"></p>
+        <p v-html="item.description.substring(0,50)+'...'"></p>
         <ul>
           <!--    作者        -->
           <li class="author">            
@@ -28,12 +30,35 @@
           </li>
           <!--    创建时间        -->
           <li class="createTime">          
-            <span>post at: {{ item.createdAt | dateFormat }}</span>
+            <span>Post at: {{ item.createdAt | dateFormat }}</span>
           </li>
         </ul>
         </div>
       </article>
       </div>
+      </el-tab-pane>
+      <el-tab-pane label="Unread posts" name="second">     
+      <div class="articles">
+      <article v-for="item in reverseUnReadPost" :key="item.id">
+      <h3 @click="articleDetail(item._id)">{{ item.name }}</h3>
+        <div class="info-box">
+        <!--    摘要      -->
+        <p v-html="item.description.substring(0,50)+'...'"></p>
+        <ul>
+          <!--    作者        -->
+          <li class="author">            
+            <span>Author: {{ item.manufacturer }}</span>
+          </li>
+          <!--    创建时间        -->
+          <li class="createTime">          
+            <span>Post at: {{ item.createdAt | dateFormat }}</span>
+          </li>
+        </ul>
+        </div>
+      </article>
+      </div>      
+      </el-tab-pane>
+      </el-tabs>
     </el-main>
     <!-- footer area -->
     <el-footer>Footer</el-footer>    
@@ -46,11 +71,14 @@ export default {
     return {
       userinfo: sessionStorage.username,
       menulist: [],
+      unreadmenulist:[], 
+      activeName: 'second',     
     }
   },
 
   created() {
     this.getMenuList()
+    this.getUnreadPost()
   },
 
   methods: {
@@ -64,12 +92,39 @@ export default {
     postNew() {      
       this.$router.push('/newpost')
     },
-    // get all post menu
+    // get all post 
     async getMenuList() {
       const {data: res, status: ress} = await this.$http.get('sauces');
       if (ress !== 200) return this.$message.error('can not read posts');        
       this.menulist = res;
-      console.log(res);
+      //console.log(this.menulist);
+    },
+
+    // get unread post 
+    async getUnreadPost() {
+      const {data: res, status: ress} = await this.$http.get('postread/'+sessionStorage.userId);
+      if (ress !== 200) return this.$message.error('can not read posts');        
+      this.unreadmenulist = res;
+      //console.log(this.unreadmenulist);     
+      }, 
+    
+
+    // go to article detail page
+    articleDetail(articleid) {
+      this.$router.push({
+          path: '/article',
+          query: {id: articleid}
+        })
+    },   
+
+  },
+
+  computed: {
+    reversePost() {
+      return this.menulist.reverse();
+    },
+    reverseUnReadPost() {
+      return this.unreadmenulist.reverse();
     },
   },
 
@@ -94,5 +149,17 @@ export default {
 <style lang="less" scoped>
 @import '../assets/css/header.less';
 @import '../assets/css/articles.less';
+
+h3 {
+      &:hover {
+            color: blue;
+            cursor: pointer;
+        }        
+      }
+
+.el-tabs {
+  padding-left: 15%;
+  width: 70%;
+}
 
 </style>

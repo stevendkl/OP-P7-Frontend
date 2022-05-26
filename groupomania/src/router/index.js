@@ -5,6 +5,7 @@ import SignUp from '../components/SignUp.vue'
 import Home from '../components/Home.vue'
 import Profile from '../components/Profile.vue'
 import Newpost from '../components/Newpost.vue'
+import Article from '../components/Article.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,7 @@ const routes = [
   { path: '/home', component: Home },
   { path: '/profile', component: Profile },
   { path: '/newpost', component: Newpost },
+  { path: '/article', Name: 'Article', component: Article },
 ]
 
 const router = new VueRouter({
