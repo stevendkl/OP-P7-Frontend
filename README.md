@@ -4,15 +4,15 @@
 
 This is the front end server for Project 7 of the Web Developer path.
 
-### Back end Prerequisites ###
+### Front end Prerequisites ###
 
-You will need to have `Node` and `npm` installed locally on your machine.
+You will need to have `npm` installed locally on your machine.
 
-### Back end Installation for use ###
+### Front end Installation for use ###
 
 Directly open `/groupomania/product_version/index.html` at internet browser.
 
-### Back end Installation for develop ###
+### Front end Installation for develop ###
 
 Clone this repo. From the `groupomania` folder of the project, run `npm install`.
 Run `vue ui`, select menu `Tasks` - `serve` at the webpage opened. 
