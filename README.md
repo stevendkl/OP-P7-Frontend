@@ -3,10 +3,11 @@
 ## OP-PROJECT7 Front End
 
 This is the front end server for Project 7 of the Web Developer path.
+The front end serve developed with Vue and Element UI.
 
 ### Front end Prerequisites ###
 
-You will need to have `npm` installed locally on your machine.
+You will need to have `npm` and `Vue CLI` installed locally on your machine.
 
 ### Front end Installation for use ###
 
