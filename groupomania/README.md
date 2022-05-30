@@ -1,6 +1,6 @@
 # Groupomania
 
-# OP-PROJECT7 Front End#
+## OP-PROJECT7 Front End##
 
 This is the front end server for Project 7 of the Web Developer path.
 
