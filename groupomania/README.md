@@ -10,7 +10,7 @@ You will need to have `Node` and `npm` installed locally on your machine.
 
 ### Back end Installation ###
 
-Clone this repo. From the root folder of the project, run `npm install`.
+Clone this repo. From the `groupomania` folder of the project, run `npm install`.
 Run `vue ui`, select menu `Tasks` - `serve` at the webpage opened. 
 Click `run task` to generate the app, then click `open app` to run the serve.
 
