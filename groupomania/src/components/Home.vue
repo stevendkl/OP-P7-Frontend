@@ -21,14 +21,14 @@
       <article v-for="item in reversePost" :key="item.id">
       <h3 @click="articleDetail(item._id)">{{ item.name }}</h3>
         <div class="info-box">
-        <!--    摘要      -->
+        <!--    title      -->
         <p v-html="formatWord(item.description).substring(0,50)+'...'"></p>
         <ul>
-          <!--    作者        -->
+          <!--    author        -->
           <li class="author">            
             <span>Author: {{ item.manufacturer }}</span>
           </li>
-          <!--    创建时间        -->
+          <!--    create time        -->
           <li class="createTime">          
             <span>Post at: {{ item.createdAt | dateFormat }}</span>
           </li>
@@ -42,14 +42,14 @@
       <article v-for="item in reverseUnReadPost" :key="item.id">
       <h3 @click="articleDetail(item._id)">{{ item.name }}</h3>
         <div class="info-box">
-        <!--    摘要      -->
+        <!--    title      -->
         <p v-html="formatWord(item.description).substring(0,50)+'...'"></p>
         <ul>
-          <!--    作者        -->
+          <!--    author        -->
           <li class="author">            
             <span>Author: {{ item.manufacturer }}</span>
           </li>
-          <!--    创建时间        -->
+          <!--    create time        -->
           <li class="createTime">          
             <span>Post at: {{ item.createdAt | dateFormat }}</span>
           </li>
@@ -120,6 +120,7 @@ export default {
   },
 
   computed: {
+    //Sort posts in reverse chronological order
     reversePost() {
       return this.menulist.reverse();
     },
@@ -129,7 +130,7 @@ export default {
   },
 
   filters: {
-    // 格式化时间字符串
+    // format time string
     dateFormat(time) {
       let dt = new Date(time);
       const y = dt.getFullYear();

@@ -5,7 +5,7 @@ import './plugins/element.js'
 import './assets/css/global.css'
 import axios from 'axios'
 
-// 配置请求的根路径
+// set url of the backend serve
 axios.defaults.baseURL = 'http://localhost:3000/api/'
 axios.interceptors.request.use(config => {
   //console.log(config)

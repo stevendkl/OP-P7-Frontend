@@ -44,18 +44,18 @@ export default {
         password: "",
       },
       signFormRules: {
-        // 验证email是否合法
+        
         email: [
           { required: true, message: 'Please input login email', trigger: 'blur' },
           { type: 'email', message: " Please input correct email address format", trigger: 'blur'},
           { min: 3, max: 20, message: '3 to 20 characters long', trigger: 'blur' }
         ],
-        // 验证用户名是否合法
+        
         username: [
           { required: true, message: 'Please input username', trigger: 'blur' },
           { min: 3, max: 20, message: '3 to 20 characters long', trigger: 'blur' }
         ],
-        // 验证密码是否合法
+        
         password: [
           { required: true, message: 'Please input login password', trigger: 'blur' },
           { min: 6, max: 15, message: '6 to 15 characters long', trigger: 'blur' }
@@ -77,7 +77,6 @@ export default {
 }
 </script>
 
-<!-- scoped定义样式只在本文件中应用 -->
 <style lang="less" scoped>
 .login_container {
   background-color: #2b4b6b;

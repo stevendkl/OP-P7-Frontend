@@ -52,7 +52,7 @@ export default {
     },
     
     async deleteAcc() {
-      // 弹框询问用户是否删除数据
+      // alert user to confirm the accout deletion
       const confirmResult = await this.$confirm(
         'This operation will permanently delete the user account, do you want to continue?',
         'Notice',
@@ -62,8 +62,8 @@ export default {
           type: 'warning'
         }
       ).catch(err => err)
-      // 如果用户确认删除，则返回值为字符串 confirm
-      // 如果用户取消了删除，则返回值为字符串 cancel
+      // if user confirmed deletion, return confirm
+      // if user cancelled deletion, return cancel
       if (confirmResult !== 'confirm') {
         return this.$message.info('Delete cancelled')
       }
@@ -75,7 +75,7 @@ export default {
   },
 
   filters: {
-    // 格式化时间字符串
+    // format time 
     dateFormat(time) {
       let dt = new Date(time);
       const y = dt.getFullYear();

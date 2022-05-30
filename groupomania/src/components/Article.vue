@@ -20,14 +20,14 @@
       <el-divider></el-divider>
       <img :src="imgUrl" alt="post_img" />
         <div class="info-box">
-        <!--    摘要      -->
+        <!--    title      -->
         <p v-html="postInfo.description"></p> 
         <ul>
-          <!--    作者        -->
+          <!--    author        -->
           <li class="author">            
             <span>Author: {{ postInfo.manufacturer }}</span>
           </li>
-          <!--    创建时间        -->
+          <!--    create Time        -->
           <li class="createTime">          
             <span>Post at: {{ postInfo.createdAt | dateFormat }}</span>
           </li>
@@ -93,7 +93,7 @@ export default {
   },
 
   filters: {
-    // 格式化时间字符串
+    // format time string
     dateFormat(time) {
       let dt = new Date(time);
       const y = dt.getFullYear();
