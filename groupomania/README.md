@@ -21,7 +21,3 @@ Click `run task` to generate the app, then click `open app` to run the serve.
 The server should run on `localhost` with default port `3000`. If the
 server runs on another port for any reason, this is printed to the
 console when the server starts, e.g. `Listening on port 3001`.
-<<<<<<< HEAD
-
-=======
->>>>>>> bde783bf870d8332abcf85d0dbe10d996729cc75
