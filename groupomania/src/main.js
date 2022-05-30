@@ -18,6 +18,10 @@ Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
 
+Vue.prototype.formatWord = function (val) {
+  return val.replace(/<.*?>/g,"")
+},
+
 new Vue({
   router,
   render: h => h(App)

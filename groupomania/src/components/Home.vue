@@ -22,7 +22,7 @@
       <h3 @click="articleDetail(item._id)">{{ item.name }}</h3>
         <div class="info-box">
         <!--    摘要      -->
-        <p v-html="item.description.substring(0,50)+'...'"></p>
+        <p v-html="formatWord(item.description).substring(0,50)+'...'"></p>
         <ul>
           <!--    作者        -->
           <li class="author">            
@@ -43,7 +43,7 @@
       <h3 @click="articleDetail(item._id)">{{ item.name }}</h3>
         <div class="info-box">
         <!--    摘要      -->
-        <p v-html="item.description.substring(0,50)+'...'"></p>
+        <p v-html="formatWord(item.description).substring(0,50)+'...'"></p>
         <ul>
           <!--    作者        -->
           <li class="author">            
@@ -72,7 +72,8 @@ export default {
       userinfo: sessionStorage.username,
       menulist: [],
       unreadmenulist:[], 
-      activeName: 'second',     
+      activeName: 'second',
+      brief:[],     
     }
   },
 
@@ -96,7 +97,7 @@ export default {
     async getMenuList() {
       const {data: res, status: ress} = await this.$http.get('sauces');
       if (ress !== 200) return this.$message.error('can not read posts');        
-      this.menulist = res;
+      this.menulist = res;      
       //console.log(this.menulist);
     },
 
@@ -104,8 +105,7 @@ export default {
     async getUnreadPost() {
       const {data: res, status: ress} = await this.$http.get('postread/'+sessionStorage.userId);
       if (ress !== 200) return this.$message.error('can not read posts');        
-      this.unreadmenulist = res;
-      //console.log(this.unreadmenulist);     
+      this.unreadmenulist = res;        
       }, 
     
 

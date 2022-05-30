@@ -15,11 +15,11 @@
     <!-- main area -->
     <el-main>
       <el-form 
-      :model="addPostForm" :rules="addPostRules" ref="addPostRef"
+      :model="addPostForm.content" :rules="addPostRules" ref="addPostRef"
       label-width="100px" class="demo-ruleForm">
           
-        <el-form-item label="Topic" prop="title">
-          <el-input v-model="addPostForm.title"></el-input>
+        <el-form-item label="Topic" prop="name">
+          <el-input v-model="addPostForm.content.name"></el-input>
         </el-form-item>
 
         <el-form-item label="Content">
@@ -27,9 +27,16 @@
         </el-form-item>
 
         <el-form-item  class="submitBtnDiv">
+          
+          <el-tag>Upload Image:</el-tag>
+          <input @change="modifyFile()" type="file" ref="file" name="image" id="File" accept=".jpg, .jpeg, .png" >        
+
           <el-button type="primary" @click="submitForm">Create Topic</el-button>
           <el-button type="info" @click="resetForm">Reset</el-button>
-        </el-form-item>
+          <!-- test
+          <el-button type="info" @click="printhtml">testget</el-button>
+           -->
+        </el-form-item>      
 
       </el-form>      
     </el-main>
@@ -49,13 +56,19 @@ export default {
       userinfo: sessionStorage.username,
 
       addPostForm: {
-        title: "",
+        content: {
+          userId: sessionStorage.userId,
+          name: "",
+          manufacturer: sessionStorage.username,
+          description: "",          
+        },
+        image: "",
       },
 
       addPostRules: {
-        title: [
+        name: [
           { required: true, message: "Please input post topic", trigger: "blur" },
-          { min: 3, max: 20, message: '3 to 20 characters long', trigger: 'blur'},
+          { min: 3, max: 50, message: '3 to 50 characters long', trigger: 'blur'},
         ],
       }, 
     }
@@ -70,11 +83,35 @@ export default {
       this.$router.push('/home')
     },
     submitForm() {
+      const html_content = this.$refs.MyEditor.getEHtml();      
+      this.addPostForm.content.description = html_content;
+
+      const formData = new FormData();
+      formData.set("image", this.file);
+      formData.set("name", this.addPostForm.content.name);
+      formData.set("userId", sessionStorage.userId);
+      formData.set("manufacturer", sessionStorage.username);
+      formData.set("description", this.addPostForm.content.description);
+      
+      this.$refs.addPostRef.validate(async valid => {
+        if (!valid) return;
+        const {data: res, status: ress} = await this.$http.post('sauces', formData);
+        if (ress !== 201) return this.$message.error(res.error);        
+        this.$message.success('Posted successfully');        
+        this.$router.push('/home');
+      });
     },
     resetForm() {
       this.$refs.addPostRef.resetFields();
       this.$refs.MyEditor.clrEditor();        
+    },
+    modifyFile() {
+      this.file = this.$refs.file.files[0];
     },    
+    /*printhtml() {
+      const html_content = this.$refs.MyEditor.getEHtml();
+      
+    }*/
   },
 };
 
@@ -95,6 +132,10 @@ form {
   margin-left: 15%;
   background-color: #fff;
   padding: 10px;
+}
+
+.el-tag {
+  margin-right: 10px;
 }
 
 </style>

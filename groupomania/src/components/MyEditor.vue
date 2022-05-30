@@ -32,7 +32,7 @@ export default Vue.extend({
             html: '<p>Hello everyone!</p>',
             toolbarConfig: { },
             editorConfig: { placeholder: 'please input content...' },
-            mode: 'default', // or 'simple'
+            mode: 'simple', // 'default' or 'simple'
         }
     },
     methods: {
@@ -44,6 +44,13 @@ export default Vue.extend({
             if (editor == null) return
             // 调用 editor 属性和 API
             editor.clear() 
+        },
+        getEHtml() {
+            const editor = this.editor // 获取 editor 实例
+            if (editor == null) return
+            // 调用 editor 属性和 API
+            const html = editor.getHtml() 
+            return html
         },
     },
 

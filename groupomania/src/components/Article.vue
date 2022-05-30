@@ -17,9 +17,11 @@
       <div class="articles">
       <article>
       <h3>{{ postInfo.name }}</h3>
+      <el-divider></el-divider>
+      <img :src="imgUrl" alt="post_img" />
         <div class="info-box">
         <!--    摘要      -->
-        <p v-html="postInfo.description"></p>  
+        <p v-html="postInfo.description"></p> 
         <ul>
           <!--    作者        -->
           <li class="author">            
@@ -49,7 +51,8 @@ export default {
         postId: this.$route.query.id,
         userId: sessionStorage.userId,
       },
-      postInfo: [],
+      postInfo: [], 
+      imgUrl: "",
     }
   },
 
@@ -81,6 +84,10 @@ export default {
       const {data: res, status: ress} = await this.$http.get('sauces/'+this.readForm.postId);
       if (ress !== 200) return this.$message.error('can not read posts');        
       this.postInfo = res;
+      if (res.imageUrl) {
+        this.imgUrl = res.imageUrl;} 
+      else { 
+        this.imgUrl = "http://localhost:3000/images/blank.png";}
       console.log(this.postInfo);
     },  
   },
@@ -112,5 +119,13 @@ article {
   margin-left: 15%;
   width:70%;
 }
+
+img {
+  max-width:70%;
+}
+
+ .el-divider--horizontal {
+     margin: 12px 0;
+ } 
 
 </style>
